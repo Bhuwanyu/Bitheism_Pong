@@ -11,9 +11,18 @@
     <script src="ball.js"></script>
     <script src="button.js"></script>
     <script src="sketch.js"></script>
+    <script src="crt.js"></script>
+    <script src="music.js"></script>
+    <script src="crt-panel.js"></script> <!-- dev slider panel (C key); remove for release if you like -->
     <style>
-      body { margin: 0; display:flex; align-items:center; justify-content:center; height:100vh; background:#111; color:#eee; font-family: Arial, sans-serif; }
-      #game-container { box-shadow: 0 6px 30px rgba(198, 53, 53, 0.5); }
+      /* black page so the curved screen's black corners blend into it */
+      body { margin: 0; display:flex; align-items:center; justify-content:center; height:100vh; overflow:hidden; background:#000; color:#eee; font-family: Arial, sans-serif; }
+      #game-container { position: relative; }
+      #game-container canvas { display: block; } /* no gap under the canvas */
+      #crt-overlay { position: absolute; pointer-events: none; }
+      /* round-win squares, placed outside the screen by sketch.js */
+      .round-markers { display: none; pointer-events: none; }
+      .round-markers div { position: fixed; box-sizing: border-box; border: 2px solid; border-radius: 3px; }
     </style>
   </head>
   <body>

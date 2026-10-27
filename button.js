@@ -11,9 +11,10 @@ class Button {
   }
 
   isHovered() {
+    let m = fieldMouse(); // mouse mapped through the CRT curve, in field coordinates
     return (
-      mouseX > this.x - this.w / 2 && mouseX < this.x + this.w / 2 &&
-      mouseY > this.y - this.h / 2 && mouseY < this.y + this.h / 2
+      m.x > this.x - this.w / 2 && m.x < this.x + this.w / 2 &&
+      m.y > this.y - this.h / 2 && m.y < this.y + this.h / 2
     );
   }
 

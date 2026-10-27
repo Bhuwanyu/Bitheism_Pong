@@ -1,0 +1,4 @@
+# itch.io upload zip, rebuilt with build-zip.ps1
+build/
+# local editor / preview settings
+.claude/

@@ -8,6 +8,19 @@ class Paddle {
     this.thickness = thickness;
     this.speed = speed;
     this.color = color; // 💡 store color
+    // movement this frame (pixels/frame), used to put spin on the ball
+    this.vx = 0;
+    this.vy = 0;
+    this.prevX = x;
+    this.prevY = y;
+  }
+
+  // call once per frame after input: how far the paddle actually moved (0 when still or against a wall)
+  trackVelocity() {
+    this.vx = this.x - this.prevX;
+    this.vy = this.y - this.prevY;
+    this.prevX = this.x;
+    this.prevY = this.y;
   }
 
   setBounds(minX, maxX, minY, maxY) {
@@ -59,10 +72,12 @@ class Paddle {
       else ball.x = right + ball.r + 0.1;
 
       ball.vx *= -1;
+      ball.hitSpin(this.vx, this.vy, 'x'); // moving up/down while hitting slices the ball
 
       // Keep speed stable and slightly increase
       ball.increaseSpeed();
       ball.limitSpeed();
+      ball.keepHeadingAway();
       return true;
     }
   } else {
@@ -81,10 +96,12 @@ class Paddle {
       else ball.y = bottom + ball.r + 0.1;
 
       ball.vy *= -1;
+      ball.hitSpin(this.vx, this.vy, 'y'); // moving left/right while hitting slices the ball
 
       // Keep speed stable and slightly increase
       ball.increaseSpeed();
       ball.limitSpeed();
+      ball.keepHeadingAway();
       return true;
     }
   }
